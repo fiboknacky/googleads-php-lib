@@ -29,5 +29,9 @@
       "name": "Google",
       "homepage": "https://github.com/googleads/googleads-php-lib/contributors"
     }
-  ]
+  ],
+  "scripts": {
+      "pre-update-cmd": "@php check_php_version.php",
+      "post-package-update": "@php check_php_version.php"
+  }
 }
