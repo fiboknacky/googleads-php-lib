@@ -14,7 +14,8 @@
   },
   "require-dev": {
     "php": ">=5.5.17",
-    "phpunit/phpunit": "^4.8.35"
+    "phpunit/phpunit": "^4.8.35 || ^5.7",
+    "squizlabs/php_codesniffer": "^2.9 || ^3.2"
   },
   "suggest": {
     "php-64bit": ">=5.5.9"
@@ -31,7 +32,7 @@
     }
   ],
   "scripts": {
-      "pre-update-cmd": "@php check_php_version.php",
-      "post-package-update": "@php check_php_version.php"
+    "pre-update-cmd": "@php check_conditions.php",
+    "pre-install-cmd": "@php check_conditions.php"
   }
 }
