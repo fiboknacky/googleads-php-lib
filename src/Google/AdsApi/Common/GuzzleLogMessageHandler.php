@@ -49,24 +49,14 @@ final class GuzzleLogMessageHandler
                             $messageFormatter->formatSummary($request, $response)
                         );
 
-                        $logResponse = ($response !== null
-                            && $response->getBody()
-                                ->isSeekable()) ? $response : null;
-
-                        if (!$logger instanceof Logger
+                        // formatDetailed() can produce long log messages
+                        // so check if it handles DEBUG level when possible.
+                        if (!($logger instanceof Logger)
                             || $logger->isHandling(Logger::DEBUG)) {
-                            // formatDetailed() can produce long log messages so check
-                            // if it handles DEBUG level when possible.
-                            $logger->debug(
-                                $messageFormatter->formatDetailed($request, $logResponse)
-                            );
-                        }
-
-                        if ($logResponse !== null) {
-                            // Rewind the response body if it was once read by
-                            // formatDetailed() so the caller of this method can use the
-                            // result immediately.
-                            \GuzzleHttp\Psr7\rewind_body($response);
+                            $logger->debug($messageFormatter->formatDetailed(
+                                $request,
+                                $response
+                            ));
                         }
 
                         return $response;
@@ -82,28 +72,16 @@ final class GuzzleLogMessageHandler
                             $messageFormatter->formatSummary($request, $response)
                         );
 
-                        $logResponse = ($response !== null
-                            && $response->getBody()
-                                ->isSeekable()) ? $response : null;
-
-                        if (!$logger instanceof Logger
+                        // formatDetailed() can produce long log messages
+                        // so check if it handles NOTICE level when
+                        // possible.
+                        if (!($logger instanceof Logger)
                             || $logger->isHandling(Logger::NOTICE)) {
-                            // formatDetailed() can produce long log messages so check
-                            // if it handles NOTICE level when possible.
-                            $logger->notice(
-                                $messageFormatter->formatDetailed(
-                                    $request,
-                                    $logResponse,
-                                    $reason
-                                )
-                            );
-                        }
-
-                        if ($logResponse !== null) {
-                            // Rewind the response body if it was once read by
-                            // formatDetailed() so the caller of this method can use the
-                            // result immediately.
-                            \GuzzleHttp\Psr7\rewind_body($response);
+                            $logger->notice($messageFormatter->formatDetailed(
+                                $request,
+                                $response,
+                                $reason
+                            ));
                         }
 
                         return \GuzzleHttp\Promise\rejection_for($reason);

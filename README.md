@@ -1,7 +1,7 @@
 ## Google Ads API PHP Client Library
 
 This project hosts the PHP client library for the various SOAP-based Ads APIs
-(AdWords and DFP) at Google.
+(AdWords and Ad Manager) at Google.
 
 > Welcome to the new ads API PHP client library!
 >
@@ -40,8 +40,8 @@ This library determines the home directory of your computer by using
 
 *   [AdWords
     adsapi_php.ini](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/adsapi_php.ini)
-*   [DFP
-    adsapi_php.ini](https://github.com/googleads/googleads-php-lib/blob/master/examples/Dfp/adsapi_php.ini)
+*   [Ad Manager
+    adsapi_php.ini](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdManager/adsapi_php.ini)
 
 ### Downloading this library
 
@@ -97,11 +97,11 @@ this library (e.g., submitting pull requests) or wish to try our examples.
 1.  Follow [Setting up your OAuth2 credentials](#setting-up-your-oauth2-credentials)
     if you haven't set up the credentials yet.
 1.  You can now use the library and run any examples you want. Try
-    [GetCampaigns.php](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201710/BasicOperations/GetCampaigns.php)
+    [GetCampaigns.php](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201806/BasicOperations/GetCampaigns.php)
     by executing the following command:
 
     ```
-    $ php examples/AdWords/v201710/BasicOperations/GetCampaigns.php
+    $ php examples/AdWords/v201806/BasicOperations/GetCampaigns.php
     ```
 
 ### Downloading a compressed tarball
@@ -122,16 +122,16 @@ client library. The extracted directory of the tarball will contain only the
 1.  Follow [Setting up your OAuth2 credentials](#setting-up-your-oauth2-credentials)
     if you haven't set up the credentials yet.
 1.  You can now run any examples you want. Try
-    [GetCampaigns.php](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201710/BasicOperations/GetCampaigns.php)
+    [GetCampaigns.php](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201806/BasicOperations/GetCampaigns.php)
     by executing the following command:
 
     ```
-    $ php examples/AdWords/v201710/BasicOperations/GetCampaigns.php
+    $ php examples/AdWords/v201806/BasicOperations/GetCampaigns.php
     ```
 
 ### Setting up your OAuth2 credentials
 
-The AdWords and DoubleClick for Publishers APIs use
+The AdWords and Ad Manager APIs use
 [OAuth2](https://oauth.net/2/) as the authentication mechanism. Follow the
 appropriate guide below based on your use case.
 
@@ -140,12 +140,12 @@ appropriate guide below based on your use case.
 *   [Using
     AdWords](https://github.com/googleads/googleads-php-lib/wiki/API-access-using-own-credentials-\(installed-application-flow\))
 *   [Using
-    DFP](https://github.com/googleads/googleads-php-lib/wiki/API-access-using-own-credentials-\(server-to-server-flow\))
+    Ad Manager](https://github.com/googleads/googleads-php-lib/wiki/API-access-using-own-credentials-\(server-to-server-flow\))
 
 **If you're accessing an API on behalf of clients...**
 
 *   [Using AdWords or
-    DFP](https://github.com/googleads/googleads-php-lib/wiki/API-access-on-behalf-of-your-clients-\(web-flow\))
+    Ad Manager](https://github.com/googleads/googleads-php-lib/wiki/API-access-on-behalf-of-your-clients-\(web-flow\))
 
 ### Basic usage
 
@@ -154,8 +154,8 @@ product.
 
 *   [AdWords
     examples](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords)
-*   [DFP
-    examples](https://github.com/googleads/googleads-php-lib/blob/master/examples/Dfp)
+*   [Ad Manager
+    examples](https://github.com/googleads/googleads-php-lib/blob/master/examples/AdManager)
 
 > All our examples are meant to be run via the command line and not through a
 > webpage.
@@ -168,15 +168,15 @@ product.
 
 The following snippet of code from the **BasicOperations/GetCampaigns.php**
 example for AdWords gives you an idea of how to use this library. The usage
-pattern is similar for DFP.
+pattern is similar for Ad Manager.
 
 ```php
 use Google\AdsApi\AdWords\AdWordsServices;
 use Google\AdsApi\AdWords\AdWordsSessionBuilder;
-use Google\AdsApi\AdWords\v201705\cm\CampaignService;
-use Google\AdsApi\AdWords\v201705\cm\OrderBy;
-use Google\AdsApi\AdWords\v201705\cm\Paging;
-use Google\AdsApi\AdWords\v201705\cm\Selector;
+use Google\AdsApi\AdWords\v201802\cm\CampaignService;
+use Google\AdsApi\AdWords\v201802\cm\OrderBy;
+use Google\AdsApi\AdWords\v201802\cm\Paging;
+use Google\AdsApi\AdWords\v201802\cm\Selector;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
 
 $oAuth2Credential = (new OAuth2TokenBuilder())
@@ -220,7 +220,7 @@ builders instead to set the same information. See the builders for details:
 
 *   [OAuth2TokenBuilder](https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/Common/OAuth2TokenBuilder.php)
 *   [AdWordsSessionBuilder](https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/AdWordsSessionBuilder.php)
-*   [DfpSessionBuilder](https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/Dfp/DfpSessionBuilder.php)
+*   [AdManagerSessionBuilder](https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdManager/AdManagerSessionBuilder.php)
 
 ### WSDL objects with names that are reserved PHP keywords
 
@@ -252,7 +252,7 @@ AdWords
 *   Report downloader logger
 *   Batch jobs utility logger
 
-DFP
+Ad Manager
 
 *   SOAP logger
 *   Report downloader logger
@@ -287,7 +287,7 @@ soapLogLevel = "NOTICE"
 If you need to further customize logging, you can specify your own logger
 entirely by providing a logger that implements
 [LoggerInterface](https://github.com/php-fig/log/blob/master/Psr/Log/LoggerInterface.php)
-in either the AdWords or DFP session builders:
+in either the AdWords or Ad Manager session builders:
 
 ```php
 $session = (new AdWordsSessionBuilder())
@@ -296,6 +296,16 @@ $session = (new AdWordsSessionBuilder())
     ->withReportDownloaderLogger(new MyCustomReportDownloaderLogger())
     ->build();
 ```
+
+### Utilities
+
+We provide some utilities in this client library for helping you use features
+in the AdWords and Ad Manager API more conveniently. Check out the following wikis for
+details:
+
+*   [BatchJobs for AdWords](//github.com/googleads/googleads-php-lib/wiki/BatchJobs-for-AdWords)
+*   [ProductPartitions for AdWords](//github.com/googleads/googleads-php-lib/wiki/ProductPartitions-for-AdWords)
+*   [ReportDownloader Utilities](//github.com/googleads/googleads-php-lib/wiki/ReportDownloader-Utilities)
 
 ### Reporting
 
@@ -336,9 +346,9 @@ CA file issues can also cause an error like this:
 ```
 Fatal error: Uncaught SoapFault exception: [WSDL] SOAP-ERROR: Parsing WSDL:
 Couldn't load from
-'https://adwords.google.com/api/adwords/cm/v201710/CampaignService?wsdl' :
+'https://adwords.google.com/api/adwords/cm/v201806/CampaignService?wsdl' :
 failed to load external entity
-"https://adwords.google.com/api/adwords/cm/v201710/CampaignService?wsdl
+"https://adwords.google.com/api/adwords/cm/v201806/CampaignService?wsdl
 ```
 
 To remedy, see [Steps for troubleshooting CA file issues](https://github.com/googleads/googleads-php-lib/wiki/Steps-for-troubleshooting-CA-file-issues).
@@ -350,14 +360,14 @@ PHPDoc for this library can be found in the
 of this repository and can be viewed at:
 
 * [AdWords](http://googleads.github.io/googleads-php-lib/AdWords/)
-* [DFP](http://googleads.github.io/googleads-php-lib/Dfp/)
+* [Ad Manager](http://googleads.github.io/googleads-php-lib/AdManager/)
 
-General AdWords and DFP API documentation can be found on our Google Developers
+General AdWords and Ad Manager API documentation can be found on our Google Developers
 site:
 
 *   [AdWords API documentation](https://developers.google.com/adwords/api)
-*   [DFP API
-    documentation](https://developers.google.com/doubleclick-publishers)
+*   [Ad Manager API
+    documentation](https://developers.google.com/ad-manager)
 
 ### Coding Style
 
@@ -381,11 +391,11 @@ For client library specific bug reports, feature requests, and patches,
 create an issue on the [issue
 tracker](https://github.com/googleads/googleads-php-lib/issues).
 
-For general AdWords and DFP API questions, bug reports, or feature requests,
+For general AdWords and Ad Manager API questions, bug reports, or feature requests,
 post to our forums:
 
 *   [AdWords API Forum](https://groups.google.com/forum/#!forum/adwords-api)
-*   [DoubleClick for Publishers API
+*   [Ad Manager API
     Forum](https://groups.google.com/forum/#!forum/google-doubleclick-for-publishers-api)
 
 ### Announcements and updates
@@ -395,12 +405,12 @@ For general ads API and client library updates and news, follow:
 *   [Google Ads Developers blog](http://googleadsdeveloper.blogspot.com)
 *   [AdWords API Announcements mailing
     list](https://groups.google.com/forum/#!forum/adwordsapi-announcements)
-*   [DFP API Sunset Announcements mailing
+*   [Ad Manager API Sunset Announcements mailing
     list](https://groups.google.com/forum/#!forum/dfpapi-sunset-announce)
 
 API deprecation schedules can be found at:
 
 *   [AdWords API deprecation
     schedule](https://developers.google.com/adwords/api/docs/sunset-dates)
-*   [DFP API deprecation
-    schedule](https://developers.google.com/doubleclick-publishers/docs/deprecation)
+*   [Ad Manager API deprecation
+    schedule](https://developers.google.com/ad-manager/docs/deprecation)
